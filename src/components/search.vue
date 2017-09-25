@@ -7,7 +7,9 @@
 				@focus='focus'
 				@blur = "blur"
 				@keydown.enter='search'
-				@keyup='get'
+				@keyup='get($event)'
+				@keydown.down="changedown()"
+				@keydown.up.prevent = 'changeup($event)'
 			>
 			<input type="submit" class="submit" @click='search()'>
 			<div class="list-demo">
@@ -17,7 +19,8 @@
 						:key='value'
 						:class="{libg:index==now}"
 						class="list-complete-item" 
-
+						@mouseover="selectHover(index)"
+						@click = "selectClick(index)"
 					>{{value}}</li>
 				</transition-group>
 			</div>
@@ -54,8 +57,11 @@
 					window.open(this.srcUrl+this.keyworld)
 				}
 			},
-			get(){
+			get($event){
+				if($event.keyCode==40||$event.keyCode==38){
+					return false;
 				 // console.log(this)
+				}
 				let that = this
 					jsonp('https://sug.so.360.cn/suggest?callback=suggest_so&encodein=utf-8&encodeout=utf-8&word='+this.keyworld,null,function(err,data){
 						if(err){
@@ -64,6 +70,30 @@
 							that.Datas = data.s
 						}
 					})
+			},
+			selectHover(index){
+				this.now = index
+			},
+			selectClick(index){
+				this.keyworld=this.Datas[index]
+				this.search()
+				console.log(index)
+				console.log(this.Datas[index])
+			},
+			changedown(){
+				this.now++
+				if(this.now ==this.Datas.length){
+					this.now=0
+				}
+				this.keyworld = this.Datas[this.now]
+			},
+			changeup($event){
+				console.log($event.keyCode)
+				this.now--
+				if(this.now<0){
+					this.now=this.Datas.length-1;
+				}
+				this.keyworld = this.Datas[this.now]
 			}
 		}
 	}
