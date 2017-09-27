@@ -22,4 +22,4 @@ npm run dev
 ![image](https://github.com/ShingLi/Bing/blob/master/1.png)
 <br/>
 ![image](https://github.com/ShingLi/Bing/blob/master/2.png)
-![image](https://github.com/ShingLi/Bing/blob/master/3.png)
+![image](https://github.com/ShingLi/Bing/blob/master/11.png)
