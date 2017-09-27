@@ -19,3 +19,4 @@ npm run dev
 这时会基于Vue-cli 自动生成本地服务器 显示效果
 
 ```
+![image](https://github.com/ShingLi/Bing/blob/master/1.png)
